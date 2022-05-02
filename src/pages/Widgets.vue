@@ -66,10 +66,6 @@ export default {
         {
           uuid: 'abc123',
           name: 'teste 1'
-        },
-        {
-          uuid: 'abc124',
-          name: 'teste 2'
         }
       ]
     }

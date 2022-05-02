@@ -14,7 +14,7 @@
             @click="$q.dark.toggle()"
             :icon="$q.dark.isActive ? 'nights_stay' : 'wb_sunny'"
           />
-
+ 
           <q-card
             v-bind:style="
               $q.platform.is.mobile
