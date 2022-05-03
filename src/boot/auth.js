@@ -1,8 +1,8 @@
 export default ({ app, router, store, Vue }) => {
+  // GOOD
   router.beforeEach((to, from, next) => {
     const user = localStorage.user ? JSON.parse(localStorage.user) : null
-
-    const jwt = localStorage.getItem('jwt') ? localStorage.getItem('jwt') : null
+    const jwt = localStorage.jwt ? localStorage.jwt : null
     if (jwt) {
       store.commit('app/setUser', user)
       store.commit('app/setJwt', jwt)
@@ -13,11 +13,10 @@ export default ({ app, router, store, Vue }) => {
     }
     if (
       to.name !== 'Login' &&
-      to.name !== 'Leads' &&
-      to.name !== 'HOME' &&
-      !store.state.app.user
+      to.name !== 'Home' &&
+      !this.$store.state.app.user
     )
-      next({ name: 'login' })
+      next({ name: 'Login' })
     else next()
   })
 }

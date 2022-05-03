@@ -14,7 +14,7 @@
             @click="$q.dark.toggle()"
             :icon="$q.dark.isActive ? 'nights_stay' : 'wb_sunny'"
           />
- 
+
           <q-card
             v-bind:style="
               $q.platform.is.mobile
@@ -39,7 +39,7 @@
                     type="text"
                     filled
                     v-model="model.nome"
-                    label="Nome"
+                    label="*Nome"
                     lazy-rules
                   />
                 </q-card>
@@ -48,7 +48,7 @@
                     type="password"
                     filled
                     v-model="model.senha"
-                    label="senha"
+                    label="*Senha"
                     lazy-rules
                   />
                 </q-card>
@@ -57,7 +57,7 @@
                     type="text"
                     filled
                     v-model="model.contato"
-                    label="Telefone"
+                    label="*Telefone"
                     lazy-rules
                   />
                 </q-card>
@@ -66,7 +66,7 @@
                     type="email"
                     filled
                     v-model="model.email"
-                    label="usuario@email.com"
+                    label="*usuario@email.com"
                     lazy-rules
                   />
                 </q-card>
@@ -340,16 +340,15 @@ export default {
         cpfCnpj: self.model.cpfCnpj
       }
       self.loading = true
-      self.$api.post('auth/local/register', registrar).then((data) => {
-        const login = {
-          identifier: self.model.email,
-          password: self.model.senha
-        }
-        self.loading = true
-
-        self.$api
-          .post('auth/local', login)
-          .then((resp) => {
+      self.$api
+        .post('auth/local/register', registrar)
+        .then((data) => {
+          const login = {
+            identifier: self.model.email,
+            password: self.model.senha
+          }
+          self.loading = true
+          self.$api.post('auth/local', login).then((resp) => {
             self.$store.commit('app/setUser', resp.data.user)
             localStorage.setItem('jwt', resp.data.jwt)
             localStorage.setItem('user', JSON.stringify(resp.data.user))
@@ -371,18 +370,17 @@ export default {
               self.$router.push('/widget')
             }, 1000)
           })
-
-          .catch((err) => {
-            setTimeout(() => {
-              self.loading = false
-              self.$q.notify({
-                progress: true,
-                message: 'USUÁRIO OU SENHA INVÁLIDOS...',
-                color: 'red'
-              })
-            }, 2000)
-          })
-      })
+        })
+        .catch((err) => {
+          setTimeout(() => {
+            self.loading = false
+            self.$q.notify({
+              progress: true,
+              message: 'É necessario preencher os campos com *',
+              color: 'red'
+            })
+          }, 2000)
+        })
     },
 
     doLogin() {
@@ -392,7 +390,6 @@ export default {
         password: self.model.senha
       }
       self.loading = true
-
       self.$api
         .post('auth/local', login)
         .then((resp) => {
@@ -432,12 +429,32 @@ export default {
 
     esqueciSenha() {
       let self = this
+      self.loading = true
       self.$api
         .post('auth/forgot-password', {
-          email: self.email
+          email: self.model.email
         })
-        .then(() => {
-          console.log(self.email)
+        .then((response) => {
+          setTimeout(() => {
+            self.loading = false
+            self.$q.notify({
+              progress: true,
+              message:
+                'Foi enviado um link de reset de senha para, para o email informado.',
+              color: 'black'
+            })
+            self.$router.push('/home')
+          }, 1000)
+        })
+        .catch((error) => {
+          setTimeout(() => {
+            self.loading = false
+            self.$q.notify({
+              progress: true,
+              message: console.log('An error occurred:', error.response),
+              color: 'red'
+            })
+          }, 2000)
         })
     }
   },

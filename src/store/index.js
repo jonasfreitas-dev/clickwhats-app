@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './app'
-import api from 'axios'
 
 // import example from './module-example'
+
+import api from '../boot/axios'
 
 Vue.use(Vuex)
 
@@ -25,7 +26,7 @@ export default function (/* { ssrContext } */) {
 
     // enable strict mode (adds overhead!)
     // for dev mode only
-    strict: process.env.DEBUGGING,
+    // strict: process.env.DEBUGGING,
     strict: process.env.DEV
   })
 

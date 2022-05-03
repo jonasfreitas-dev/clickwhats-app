@@ -231,6 +231,7 @@ export default {
           console.log(erro)
         })
     },
+
     get() {
       let self = this
       // const { id } = self.$route.params;

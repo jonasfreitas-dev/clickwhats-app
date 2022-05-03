@@ -25,7 +25,7 @@
                 </q-item>
                 <q-item clickable to="/configuracoes" v-close-popup>
                   <q-item-section class="text-center" flat no-caps
-                    >Prefil</q-item-section
+                    >Perfil</q-item-section
                   >
                 </q-item>
                 <q-separator />

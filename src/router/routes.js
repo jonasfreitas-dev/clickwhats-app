@@ -4,6 +4,11 @@ const routes = [
     name: 'Login',
     component: () => import('pages/Login.vue')
   },
+  {
+    path: '/resetSenha',
+    name: 'ResetSenha',
+    component: () => import('pages/resetSenha.vue')
+  },
 
   // {
   //   path: "",
@@ -49,7 +54,10 @@ const routes = [
         name: 'Widget',
         component: () => import('pages/Widgets.vue')
       },
-      { path: 'widget/:id', component: () => import('pages/Widget.vue') }
+      {
+        path: 'widget/:id',
+        component: () => import('pages/Widget.vue')
+      }
     ]
   },
 
