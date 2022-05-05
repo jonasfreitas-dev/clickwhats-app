@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: process.env.API
+  baseURL: 'https://warm-mugs-cross-168-121-203-197.loca.lt/api'
 })
 
 let token = localStorage.getItem('jwt')

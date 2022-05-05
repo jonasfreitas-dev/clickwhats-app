@@ -1,7 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    
-      <Chat
+    <Chat
       :botId="botId"
       :botName="botName"
       :avatarUrl="avatarUrl"
@@ -15,7 +14,7 @@
       @onMessageWasSent="handleMessageReceived"
     />
 
-      <!-- <q-card
+    <!-- <q-card
       class="q-pa-sm"
       style="
         border-radius: 8px;
@@ -45,17 +44,17 @@
             label="Endereço (Url) da Imagem para o assistente"
           />
         </div> -->
-      <!-- <div class="q-gutter-sm">
+    <!-- <div class="q-gutter-sm">
           <q-checkbox v-model="initOpen" label="Encurtar Link" />
         </div> -->
-      <!-- <prism-editor
+    <!-- <prism-editor
           class="my-editor"
           v-model="code"
           :highlight="highlighter"
           line-numbers
           readonly
         ></prism-editor> -->
-      <!-- <div class="q-gutter-sm">
+    <!-- <div class="q-gutter-sm">
           <q-input
             filled
             label="COR DO TEXTO DA MENSAGEM ENVIADA"
@@ -113,7 +112,7 @@
             </template>
           </q-input>
         </div> -->
-      <!-- <div class="q-gutter-sm q-ma-sm">
+    <!-- <div class="q-gutter-sm q-ma-sm">
           <q-btn
             label="Copiar Script"
             color="green"
@@ -142,7 +141,7 @@ export default {
   name: 'livechat',
 
   components: {
-    Chat: () => import("components/Chat"),
+    Chat: () => import('components/Chat')
     // PrismEditor,
   },
 
@@ -204,9 +203,10 @@ export default {
   },
   // init chat with a message
   mounted() {
-    if (this.showStartMsg)
-      this.messageListWel.push({
-        body: this.startMsg,
+    let self = this
+    if (self.showStartMsg)
+      self.messageListWel.push({
+        body: self.startMsg,
         author: 'callwhats'
       })
   },

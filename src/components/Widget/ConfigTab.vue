@@ -38,7 +38,7 @@
           <div class="col-12 q-mt-lg">
             <q-input
               filled
-              v-model="name"
+              v-model="model.nome"
               label="Nome"
               hint="Loja1, Loja2, Vendas, Suporte"
               lazy-rules
@@ -83,7 +83,7 @@
           class="q-ma-md full-height row wrap justify-center items-stretch content-start"
         >
           <q-card class="fit preview">
-            <Widget :name="name" :widgetMessage="widgetMessage" />
+            <Widget :name="nome" :widgetMessage="widgetMessage" />
           </q-card>
         </div>
       </div>
@@ -129,15 +129,17 @@
 <script>
 export default {
   components: {
-    Widget: () => import('./Widget')
+    Widget: () => import('./Widge t')
   },
   data() {
     return {
-      name: '',
-      buttonMessage: '',
-      widgetMessage: '',
-      hideLogo: false,
-      roundLogo: false
+      model: {
+        nome: '',
+        buttonMessage: '',
+        widgetMessage: '',
+        hideLogo: false,
+        roundLogo: false
+      }
     }
   }
 }

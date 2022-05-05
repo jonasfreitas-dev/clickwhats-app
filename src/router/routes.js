@@ -31,17 +31,17 @@ const routes = [
         component: () => import('pages/Home.vue')
       },
 
-      {
-        path: 'leads',
-        name: 'Leads',
-        component: () => import('pages/leads/index.vue')
-      },
+      // {
+      //   path: 'leads',
+      //   name: 'Leads',
+      //   component: () => import('pages/leads/index.vue')
+      // },
 
-      {
-        path: 'responder',
-        name: 'Responder',
-        component: () => import('pages/leads/responder.vue')
-      },
+      // {
+      //   path: 'responder',
+      //   name: 'Responder',
+      //   component: () => import('pages/leads/responder.vue')
+      // },
 
       {
         path: 'configuracoes',
@@ -57,6 +57,15 @@ const routes = [
       {
         path: 'widget/:id',
         component: () => import('pages/Widget.vue')
+      },
+      {
+        path: 'agent',
+        name: 'Agent',
+        component: () => import('pages/Agents.vue')
+      },
+      {
+        path: 'agent/:id',
+        component: () => import('pages/Agent.vue')
       }
     ]
   },

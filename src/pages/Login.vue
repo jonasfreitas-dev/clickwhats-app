@@ -23,13 +23,13 @@
             "
           >
             <q-card-section class="items-center">
-              <router-link label="CLICK WHATS" to="/" id="logo">
+              <q-btn flat href="/home" id="logo">
                 <q-avatar size="25px">
                   <img src="/img/logo.png" />
                 </q-avatar>
-              </router-link>
+              </q-btn>
               <div class="text-h6">
-                <strong> CLICK WHATS </strong>
+                <strong clickable to="/"> CLICK WHATS </strong>
               </div>
             </q-card-section>
             <q-card-section>
@@ -138,13 +138,13 @@
             "
           >
             <q-card-section class="items-center">
-              <router-link label="CLICK WHATS" to="/" id="logo">
+              <q-btn flat href="Home" id="logo">
                 <q-avatar size="25px">
                   <img src="/img/logo.png" />
                 </q-avatar>
-              </router-link>
+              </q-btn>
               <div class="text-h6">
-                <strong> CLICK WHATS </strong>
+                <strong clickable to="/"> CLICK WHATS </strong>
               </div>
             </q-card-section>
             <q-card-section>
@@ -240,11 +240,11 @@
             "
           >
             <q-card-section class="items-center">
-              <router-link label="CLICK WHATS" to="/" id="logo">
+              <q-btn flat href="/home" id="logo">
                 <q-avatar size="25px">
                   <img src="/img/logo.png" />
                 </q-avatar>
-              </router-link>
+              </q-btn>
               <div class="text-h6">
                 <strong clickable to="/"> CLICK WHATS </strong>
               </div>

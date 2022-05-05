@@ -112,10 +112,18 @@ export default {
 
     doLogout() {
       let self = this
-
-      self.$store.commit('app/setUser', null)
-      self.$api.defaults.headers.common.Authorization = null
-      self.$router.push('/login')
+      localStorage.removeItem('jwt')
+      localStorage.removeItem('user')
+      console.log(self.$store)
+      setTimeout(() => {
+        self.loading = false
+        self.$q.notify({
+          progress: true,
+          message: 'Volte sempre !',
+          color: 'black'
+        })
+        self.$router.push('/login')
+      }, 500)
     }
   },
 

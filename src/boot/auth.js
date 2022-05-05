@@ -14,7 +14,8 @@ export default ({ app, router, store, Vue }) => {
     if (
       to.name !== 'Login' &&
       to.name !== 'Home' &&
-      !this.$store.state.app.user
+      to.name !== 'Widget' &&
+      !store.state.app.user
     )
       next({ name: 'Login' })
     else next()
