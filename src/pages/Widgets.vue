@@ -3,29 +3,123 @@
     <div class="q-mt-md q-pa-md">
       <label class="tittle">Meus Widgets</label>
       <q-btn
+        @click="addWidget"
         flat
         rounded
         color="primary"
         size="md"
         style="margin-top: -4px"
         label="+ Adicionar"
-        @click="add"
-      ></q-btn>
+      />
     </div>
 
     <div class="flex row flex-start q-gutter-sm">
       <q-card
+        paddin
         bordered
         class="card"
         v-for="(widget, index) in widgets"
         :key="index"
-        @click="goTo(widget)"
-      >
-        <q-card-section class="text-center">
-          <label class="card-tittle">{{ widget.name }}</label>
+        ><p></p>
+        <div @click="goTo(widget)" class="text-center">
+          <strong>{{ widget.nome }}</strong>
+        </div>
+        <div class="text-center">
+          <div style="font-size: 0.8em" class="text-grey">
+            {{ widget.widgetMsg }}
+          </div>
+        </div>
+        <q-separator />
+        <q-card-section paddin class="text-center">
+          <q-list dense paddin>
+            <div v-for="(agent, index) in widget.agents" :key="index">
+              <q-item scroll-target v-if="index < 6" v-ripple>
+                <q-item-section topo avatar>
+                  <q-avatar>
+                    <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+                  </q-avatar>
+                </q-item-section>
+                <q-item-section
+                  lines="2"
+                  flat
+                  rounded
+                  no-caps
+                  style="font-size: 0.7em"
+                  class="text-center"
+                  @click="to(agent)"
+                  >{{ agent.nome }}</q-item-section
+                >
+                <q-space />
+                <q-btn flat rounded no-caps class="text-blue">Clone</q-btn>
+              </q-item>
+            </div>
+            <q-item v-if="index < 6" v-ripple>
+              <q-item-section dense top>
+                <q-btn
+                  flat
+                  no-caps
+                  dense
+                  rounded
+                  style="font-size: 1em"
+                  class="text-blue"
+                  @click="goTo(widget)"
+                >
+                  <q-icon style="font-size: 1.5em" name="person_search" />
+
+                  Ver agentes
+                </q-btn>
+              </q-item-section>
+            </q-item>
+            <q-separator />
+            <p></p>
+            <q-card flat>
+              <q-item-section dense top>
+                <q-btn
+                  flat
+                  no-caps
+                  dense
+                  rounded
+                  style="font-size: 0.8em"
+                  class="text-blue"
+                  @click="addAgent"
+                >
+                  <q-icon style="font-size: 1.5em" name="add_circle" />
+
+                  Add novo agente
+                </q-btn>
+              </q-item-section>
+              <q-item-section dense top>
+                <q-btn
+                  flat
+                  dense
+                  no-caps
+                  rounded
+                  style="font-size: 0.8em"
+                  class="text-blue"
+                >
+                  <q-icon style="font-size: 1.5em" name="edit" />
+                  Editar landing page</q-btn
+                >
+              </q-item-section>
+              <q-item-section dense top>
+                <q-btn
+                  flat
+                  dense
+                  no-caps
+                  rounded
+                  style="font-size: 0.8em"
+                  class="text-blue"
+                >
+                  <q-icon style="font-size: 1.5em" name="article" />
+
+                  Ir para landing page</q-btn
+                >
+              </q-item-section>
+            </q-card>
+          </q-list>
         </q-card-section>
       </q-card>
-      <q-card bordered class="card-add">
+      <q-card bordered @click="addWidget" class="card-add">
         <q-card-section class="text-center">
           <label style="font-size: 1.2rem">Adicionar widget</label>
         </q-card-section>
@@ -62,24 +156,85 @@
 export default {
   data() {
     return {
-      widgets: [
-        {
-          uuid: 'abc123',
-          name: 'teste 1'
-        },
-        {
-          uuid: 'abc124',
-          name: 'teste 2'
-        }
-      ]
+      widgets: []
+      // agents: []
     }
   },
   methods: {
-    add() {},
+    addWidget() {
+      let self = this
+      self.$router.push('widget/new')
+    },
+
+    addAgent() {
+      let self = this
+      self.$router.push('agent/new')
+    },
+
     goTo(widget) {
       let self = this
       self.$router.push('widget/' + widget.uuid)
+    },
+
+    to(agent) {
+      let self = this
+      self.$router.push('agent/' + agent.id)
+    },
+
+    getWidgets() {
+      let self = this
+      const { id } = self.$store.state.app.user
+      const qs = require('qs')
+      const query = qs.stringify({
+        where: {
+          child_of: {
+            id: id
+          }
+        }
+      })
+      self.$api
+        .get(`widgets?${query}`)
+        .then(({ data }) => {
+          self.widgets = data.map((item) => {
+            return { ...item }
+          })
+          console.log(self.widgets)
+        })
+
+        .catch((erro) => {
+          console.log(erro)
+        })
+    },
+    getAgents() {
+      let self = this
+      const { id } = self.$store.state.app.user
+      const qs = require('qs')
+      const query = qs.stringify({
+        where: {
+          child_of: {
+            id: id
+          }
+        }
+      })
+      self.$api
+        .get('agents')
+        .then(({ data }) => {
+          self.agents = data.map((item) => {
+            return { ...item }
+          })
+          console.log(self.agents)
+        })
+
+        .catch((erro) => {
+          console.log(erro)
+        })
     }
+  },
+
+  mounted() {
+    let self = this
+    self.getWidgets()
+    self.getAgents()
   }
 }
 </script>
@@ -91,8 +246,8 @@ export default {
 }
 
 .card {
-  min-height: 200px;
-  min-width: 200px;
+  height: 350px;
+  width: 300px;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -103,8 +258,8 @@ export default {
 }
 
 .card-add {
-  min-height: 200px;
-  min-width: 200px;
+  height: 350px;
+  width: 300px;
   border-radius: 10px;
   color: gray;
   background-color: whitesmoke;
@@ -112,8 +267,8 @@ export default {
 }
 
 .card-premium {
-  min-height: 200px;
-  min-width: 200px;
+  min-height: 350px;
+  min-width: 300px;
   border-radius: 10px;
   color: white;
   background-color: blueviolet;

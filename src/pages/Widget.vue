@@ -9,7 +9,7 @@
         class="bg-white text-gray shadow-1 fit"
         :breakpoint="0"
       >
-        <q-btn class="q-ml-md" flat color="gray" icon="home" to="/" />
+        <q-btn class="q-ml-md" flat color="gray" icon="home" to="/widget" />
         <q-tab no-caps name="widget" label="Widget" />
         <q-tab no-caps name="agents" label="Agentes" />
         <q-tab no-caps name="forms" label="Chat Forms" />
@@ -25,7 +25,9 @@
         <q-tab-panel name="widget" class="q-pa-none">
           <WidgetPanel />
         </q-tab-panel>
-        <q-tab-panel name="agents" class="q-pa-none"> </q-tab-panel>
+        <q-tab-panel name="agents" class="q-pa-none">
+          <Agents />
+        </q-tab-panel>
         <q-tab-panel name="forms" class="q-pa-none">
           <div class="row my-card">
             <div class="col-sm-12">
@@ -55,7 +57,9 @@
             @click="add"
           ></q-btn>
         </q-tab-panel>
-        <q-tab-panel name="leads" class="q-pa-none"> </q-tab-panel>
+        <q-tab-panel name="leads" class="q-pa-none">
+          <Leads />
+        </q-tab-panel>
         <q-tab-panel name="stats" class="q-pa-none"> </q-tab-panel>
       </q-tab-panels>
     </div>
@@ -64,10 +68,15 @@
 
 <script>
 import WidgetPanel from '../components/Widget/WidgetPanel'
+import Leads from '../components/leads/leads'
+import Agents from '../components/agents/agents'
+
 export default {
   name: 'Widget',
   components: {
-    WidgetPanel
+    WidgetPanel,
+    Leads,
+    Agents
   },
   data() {
     return {
