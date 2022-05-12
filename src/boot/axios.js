@@ -4,7 +4,7 @@ import axios from 'axios'
 Vue.prototype.$axios = axios
 
 const api = axios.create({
-  baseURL: 'https://empty-cases-rush-179-125-21-219.loca.lt/api'
+  baseURL: 'https://fruity-pots-smell-138-117-223-71.loca.lt/api'
 })
 
 Vue.prototype.$api = api

@@ -25,7 +25,7 @@
             <q-form class="q-gutter-md">
               <q-card>
                 <q-input
-                  type="*password"
+                  type="password"
                   filled
                   v-model="model.senha"
                   label="*Nova senha"
@@ -67,8 +67,7 @@ export default {
       model: {
         code: '',
         senha: '',
-        confirmacaoSenha: '',
-        email: ''
+        confirmacaoSenha: ''
       }
     }
   },
@@ -107,7 +106,10 @@ export default {
         })
     }
   },
-  mounted() {}
+  mounted() {
+    let self = this
+    self.model.code = self.$route.query.code
+  }
 }
 </script>
 

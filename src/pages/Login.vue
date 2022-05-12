@@ -36,6 +36,7 @@
               <q-form class="q-gutter-md">
                 <q-card>
                   <q-input
+                    outlined
                     type="text"
                     filled
                     v-model="model.nome"
@@ -45,6 +46,7 @@
                 </q-card>
                 <q-card>
                   <q-input
+                    outlined
                     type="password"
                     filled
                     v-model="model.senha"
@@ -54,6 +56,7 @@
                 </q-card>
                 <q-card>
                   <q-input
+                    outlined
                     type="text"
                     filled
                     v-model="model.contato"
@@ -454,7 +457,7 @@ export default {
               message: console.log('An error occurred:', error.response),
               color: 'red'
             })
-          }, 2000)
+          }, 1000)
         })
     }
   },

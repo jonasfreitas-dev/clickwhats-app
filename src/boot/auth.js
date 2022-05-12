@@ -13,6 +13,7 @@ export default ({ app, router, store, Vue }) => {
     }
     if (
       to.name !== 'Login' &&
+      to.name !== 'ResetSenha' &&
       to.name !== 'Home' &&
       to.name !== 'Widget' &&
       !store.state.app.user

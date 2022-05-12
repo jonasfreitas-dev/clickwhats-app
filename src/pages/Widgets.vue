@@ -26,17 +26,14 @@
         </div>
         <div class="text-center">
           <div style="font-size: 0.8em" class="text-grey">
-            Use sua conta do WhatsApp
-          </div>
-          <div style="font-size: 0.8em" class="text-grey">
-            para suporte e vendas
+            {{ widget.widgetMsg }}
           </div>
         </div>
         <q-separator />
         <q-card-section paddin class="text-center">
           <q-list dense paddin>
             <div v-for="(agent, index) in widget.agents" :key="index">
-              <q-item scroll-target v-if="index < 2" v-ripple>
+              <q-item scroll-target v-if="index < 6" v-ripple>
                 <q-item-section topo avatar>
                   <q-avatar>
                     <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
@@ -56,7 +53,7 @@
                 <q-btn flat rounded no-caps class="text-blue">Clone</q-btn>
               </q-item>
             </div>
-            <q-item v-if="index < 2" v-ripple>
+            <q-item v-if="index < 6" v-ripple>
               <q-item-section dense top>
                 <q-btn
                   flat
@@ -196,7 +193,7 @@ export default {
         }
       })
       self.$api
-        .get(`widgets/findWidgets?${query}`)
+        .get(`widgets?${query}`)
         .then(({ data }) => {
           self.widgets = data.map((item) => {
             return { ...item }
@@ -223,12 +220,7 @@ export default {
         .get('agents')
         .then(({ data }) => {
           self.agents = data.map((item) => {
-            return {
-              id: item.id,
-              // uuid: item.uuid,
-              nome: item.nome,
-              child_of: item.child_of
-            }
+            return { ...item }
           })
           console.log(self.agents)
         })
